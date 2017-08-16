@@ -176,9 +176,9 @@ int check ()
  *writed to the output file 
  *
  */
-void writesInOutputfile(FILE *outfile, long double locationX, long double locationY)
+void writesInOutputfile(FILE *outfile, long double locX, long double locY)
 {
-        fprintf(outfile, "%.3Le, %.3Le, ", locationX, locationY);
+        fprintf(outfile, "%.3Le, %.3Le, ", locX, locY);
 
 }
 

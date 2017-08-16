@@ -10,8 +10,7 @@
                         // by -1 an dI will use it as +B in the functions when needed
 #define X "x"
 #define Y "y"
-#define NEND 0
-#define END 1
+
 
 #define BUFF 100
 
@@ -120,6 +119,7 @@ int forwardEuler(struct spaceShipInfo* s, long dtime)
     long double accelerationX = 0;
     long double accelerationY = 0;
     int i;
+    int counter =0;
     for ( i = 0; i < dtime; i++ )
 	{
 		// get the new location since its all in pointers the orginal var changes value
@@ -139,15 +139,15 @@ int forwardEuler(struct spaceShipInfo* s, long dtime)
 
 		if ( i % (numberOfSteps / prints ) == 0)
 		{
-		        if ( (int) dtime == i + 1 )
-				{
-		            fprintf(outfile, "%.3Le, %.3Le\n", s->locationX, s->locationY);
-
-		        }
-				else
-				{
-					writesInOutputfile(outfile, s->locationX, s->locationY);
-				}
+            counter++;
+            if ( counter == prints )
+            {
+                fprintf(outfile, "%.3Le, %.3Le\n", s->locationX, s->locationY);
+            }
+            else
+            {
+                writesInOutputfile(outfile, s->locationX, s->locationY);
+            }
         }
     }
 
@@ -375,10 +375,10 @@ int main(int argc, char **argv)
 	{
         FILE* inFile = fopen(argv[1], "r");
         outfile = fopen(argv[2], "w");
-        if (outfile == NULL || inFile == NULL) 	
+        if (outfile == NULL || inFile == NULL)
 		{
-                fprintf(stderr, "Error in input file");
-                return(-1);
+            fprintf(stderr, "Error in input file");
+            return(-1);
         } 
 		else
         {
